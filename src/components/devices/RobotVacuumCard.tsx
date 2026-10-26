@@ -39,8 +39,8 @@ export const RobotVacuumCard: React.FC<Props> = ({ device, onCommand }) => {
     <div
       className={`relative rounded-3xl p-5 transition-all duration-300 border ${
         isCleaning
-          ? 'bg-gradient-to-br from-teal-500/10 via-teal-500/5 to-transparent border-teal-500/30 shadow-lg shadow-teal-500/5'
-          : 'bg-white/80 dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800'
+          ? 'bg-gradient-to-br from-teal-500/15 via-teal-500/5 to-transparent border-teal-500/40 shadow-lg shadow-teal-500/5'
+          : 'theme-bg-card theme-border'
       }`}
     >
       <div className="flex items-start justify-between">
@@ -49,33 +49,33 @@ export const RobotVacuumCard: React.FC<Props> = ({ device, onCommand }) => {
             className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
               isCleaning
                 ? 'bg-teal-500 text-white shadow-md shadow-teal-500/30 animate-pulse'
-                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+                : 'theme-bg-sub theme-text-sub'
             }`}
           >
             <Bot className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-base leading-tight">
+            <h3 className="font-semibold theme-text-main text-base leading-tight">
               {device.name}
             </h3>
             <div className="flex items-center space-x-2 mt-1">
               <span className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${currentStatusInfo.color}`}>
                 {currentStatusInfo.label}
               </span>
-              <span className="text-[11px] text-zinc-400 capitalize">{device.platform}</span>
+              <span className="text-[11px] theme-text-muted capitalize">{device.platform}</span>
             </div>
           </div>
         </div>
 
         {/* 배터리 잔량 */}
-        <div className="flex items-center space-x-1.5 bg-zinc-50 dark:bg-zinc-800 px-2.5 py-1 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-300">
+        <div className="flex items-center space-x-1.5 theme-bg-sub px-2.5 py-1 rounded-xl text-xs font-medium theme-text-sub">
           <BatteryCharging className="w-4 h-4 text-emerald-500" />
           <span>{battery}%</span>
         </div>
       </div>
 
       {/* 청소기 조작 컨트롤 버튼 바 */}
-      <div className="mt-5 pt-4 border-t border-zinc-100 dark:border-zinc-800/80 grid grid-cols-2 gap-2">
+      <div className="mt-5 pt-4 border-t theme-border grid grid-cols-2 gap-2">
         {isCleaning ? (
           <button
             onClick={() => sendVacuumCommand('vacuum_pause')}
@@ -101,8 +101,8 @@ export const RobotVacuumCard: React.FC<Props> = ({ device, onCommand }) => {
           disabled={loading || status === 'docked'}
           className={`flex items-center justify-center space-x-2 py-2.5 px-4 rounded-2xl font-semibold text-xs transition-all ${
             status === 'docked'
-              ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 cursor-not-allowed'
-              : 'bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-200 hover:bg-zinc-300 active:scale-95'
+              ? 'theme-bg-sub opacity-50 cursor-not-allowed theme-text-muted'
+              : 'theme-bg-sub theme-text-main hover:opacity-80 active:scale-95'
           }`}
         >
           <Home className="w-4 h-4" />

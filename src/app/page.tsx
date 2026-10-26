@@ -10,6 +10,8 @@ import { RoomTabs } from '@/components/dashboard/RoomTabs';
 import { DeviceCardRenderer } from '@/components/dashboard/DeviceCardRenderer';
 import { RefreshCw, Inbox, AlertCircle } from 'lucide-react';
 import { authFetch } from '@/lib/api';
+import { useTheme } from '@/lib/theme';
+import { AppTheme } from '@/types/config';
 
 export default function DashboardPage() {
   const [devices, setDevices] = useState<Device[]>([]);
@@ -21,6 +23,8 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const [isEmbedded, setIsEmbedded] = useState(false);
+  const [serverDefaultTheme, setServerDefaultTheme] = useState<AppTheme>('familywiki');
+  const { theme, setTheme } = useTheme(serverDefaultTheme);
 
   // iframe (FamilyWiki 등) 내부 여부 감지
   useEffect(() => {
@@ -45,6 +49,9 @@ export default function DashboardPage() {
       setRooms(data.rooms || []);
       setRole(data.role || 'user');
       setIsMock(data.isMock ?? true);
+      if (data.theme) {
+        setServerDefaultTheme(data.theme);
+      }
       setError(null);
     } catch (err: any) {
       setError(err.message || '네트워크 오류가 발생했습니다.');
@@ -124,6 +131,8 @@ export default function DashboardPage() {
         isMock={isMock}
         onRefresh={() => fetchDevices()}
         isEmbedded={isEmbedded}
+        theme={theme}
+        onThemeChange={(newTheme) => setTheme(newTheme, role === 'admin')}
       />
 
       <main className="flex-1 w-full max-w-[1600px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 transition-all duration-300">
@@ -164,17 +173,17 @@ export default function DashboardPage() {
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
-                className="h-44 rounded-3xl bg-zinc-200/60 dark:bg-zinc-800/60 animate-pulse border border-zinc-200/80 dark:border-zinc-800"
+                className="h-44 rounded-3xl theme-bg-sub animate-pulse theme-border border"
               />
             ))}
           </div>
         ) : displayedDevices.length === 0 ? (
-          <div className="flex flex-col items-center justify-center p-12 text-center bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800">
-            <Inbox className="w-12 h-12 text-zinc-300 dark:text-zinc-700 mb-3" />
-            <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-300">
+          <div className="flex flex-col items-center justify-center p-12 text-center theme-bg-card rounded-3xl theme-border border">
+            <Inbox className="w-12 h-12 theme-text-muted mb-3" />
+            <h3 className="text-base font-semibold theme-text-main">
               배치된 기기가 없습니다
             </h3>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-xs theme-text-muted mt-1">
               관리자 페이지에서 이 방에 기기를 배치하거나 일반 표시에 체크해주세요.
             </p>
           </div>

@@ -34,8 +34,8 @@ export const RoomTabs: React.FC<Props> = ({
         onClick={() => onSelectRoom('all')}
         className={`flex items-center space-x-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 shrink-0 ${
           selectedRoom === 'all'
-            ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-md'
-            : 'bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-800'
+            ? 'bg-emerald-600 dark:bg-emerald-500 text-white shadow-md'
+            : 'theme-bg-card theme-border border theme-text-sub hover:opacity-80'
         }`}
       >
         <LayoutGrid className="w-4 h-4" />
@@ -43,8 +43,8 @@ export const RoomTabs: React.FC<Props> = ({
         <span
           className={`text-[11px] px-1.5 py-0.2 rounded-full font-bold ${
             selectedRoom === 'all'
-              ? 'bg-zinc-700 dark:bg-zinc-300 text-white dark:text-zinc-900'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+              ? 'bg-emerald-700/60 text-white'
+              : 'theme-bg-sub theme-text-muted'
           }`}
         >
           {totalCount}
@@ -63,8 +63,8 @@ export const RoomTabs: React.FC<Props> = ({
             onClick={() => onSelectRoom(room.id)}
             className={`flex items-center space-x-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl text-xs sm:text-sm font-semibold whitespace-nowrap transition-all duration-200 shrink-0 ${
               isSelected
-                ? 'bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-md'
-                : 'bg-white/80 dark:bg-zinc-900/80 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-800'
+                ? 'bg-emerald-600 dark:bg-emerald-500 text-white shadow-md'
+                : 'theme-bg-card theme-border border theme-text-sub hover:opacity-80'
             }`}
           >
             <IconComponent className="w-4 h-4" />
@@ -72,8 +72,8 @@ export const RoomTabs: React.FC<Props> = ({
             <span
               className={`text-[11px] px-1.5 py-0.2 rounded-full font-bold ${
                 isSelected
-                  ? 'bg-zinc-700 dark:bg-zinc-300 text-white dark:text-zinc-900'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+                  ? 'bg-emerald-700/60 text-white'
+                  : 'theme-bg-sub theme-text-muted'
               }`}
             >
               {count}

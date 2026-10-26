@@ -64,16 +64,16 @@ export const RoomManager: React.FC<Props> = ({ rooms, onRefresh }) => {
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 p-6 shadow-sm">
+    <div className="theme-bg-card rounded-3xl theme-border border p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">공간 (방) 관리</h2>
-          <p className="text-xs text-zinc-500 mt-1">대시보드에 표시할 구역/방을 추가하거나 순서를 변경합니다.</p>
+          <h2 className="text-lg font-bold theme-text-main">공간 (방) 관리</h2>
+          <p className="text-xs theme-text-muted mt-1">대시보드에 표시할 구역/방을 추가하거나 순서를 변경합니다.</p>
         </div>
         <button
           onClick={handleSaveAll}
           disabled={saving}
-          className="flex items-center space-x-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-sm"
+          className="flex items-center space-x-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold shadow-sm"
         >
           <Save className="w-3.5 h-3.5" />
           <span>전체 저장</span>
@@ -81,18 +81,18 @@ export const RoomManager: React.FC<Props> = ({ rooms, onRefresh }) => {
       </div>
 
       {/* 새 방 추가 인풋 */}
-      <div className="flex flex-wrap items-center gap-2 p-3 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl mb-5">
+      <div className="flex flex-wrap items-center gap-2 p-3 theme-bg-sub rounded-2xl mb-5 theme-border border">
         <input
           type="text"
           placeholder="새 방 이름 (예: 아이방, 옷방)"
           value={newRoomName}
           onChange={(e) => setNewRoomName(e.target.value)}
-          className="text-xs p-2.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 flex-1 min-w-[150px]"
+          className="text-xs p-2.5 rounded-xl theme-border border theme-bg-card theme-text-main flex-1 min-w-[150px]"
         />
         <select
           value={newRoomIcon}
           onChange={(e) => setNewRoomIcon(e.target.value)}
-          className="text-xs p-2.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800"
+          className="text-xs p-2.5 rounded-xl theme-border border theme-bg-card theme-text-main"
         >
           {AVAILABLE_ICONS.map((i) => (
             <option key={i.id} value={i.id}>
@@ -102,7 +102,7 @@ export const RoomManager: React.FC<Props> = ({ rooms, onRefresh }) => {
         </select>
         <button
           onClick={handleAddRoom}
-          className="flex items-center space-x-1 px-4 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 rounded-xl text-xs font-semibold"
+          className="flex items-center space-x-1 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-semibold"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>방 추가</span>
@@ -114,17 +114,17 @@ export const RoomManager: React.FC<Props> = ({ rooms, onRefresh }) => {
         {roomList.map((room, idx) => (
           <div
             key={room.id}
-            className="flex items-center justify-between p-3.5 bg-zinc-50/70 dark:bg-zinc-800/40 rounded-2xl border border-zinc-100 dark:border-zinc-800"
+            className="flex items-center justify-between p-3.5 theme-bg-sub rounded-2xl theme-border border"
           >
             <div className="flex items-center space-x-3">
-              <span className="w-6 text-center font-mono text-xs text-zinc-400">{idx + 1}</span>
-              <span className="font-semibold text-sm text-zinc-800 dark:text-zinc-200">{room.name}</span>
-              <span className="text-xs text-zinc-400 font-mono">({room.id})</span>
+              <span className="w-6 text-center font-mono text-xs theme-text-muted">{idx + 1}</span>
+              <span className="font-semibold text-sm theme-text-main">{room.name}</span>
+              <span className="text-xs theme-text-muted font-mono">({room.id})</span>
             </div>
 
             <button
               onClick={() => handleDelete(room.id)}
-              className="p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/40 rounded-xl transition-colors"
+              className="p-2 text-rose-500 hover:bg-rose-500/10 rounded-xl transition-colors"
               title="삭제"
             >
               <Trash2 className="w-4 h-4" />

@@ -1,10 +1,13 @@
 import { DeviceMappingConfig } from './device';
 import { Room } from './room';
 
+export type AppTheme = 'light' | 'dark' | 'familywiki';
+
 export interface AppConfig {
   userPin: string; // 기본값 "1234"
   adminPin: string; // 기본값 "5678"
   jwtSecret: string;
+  theme: AppTheme; // 'light' | 'dark' | 'familywiki'
   homeAssistant: {
     url: string; // e.g. "http://localhost:8123"
     token: string;

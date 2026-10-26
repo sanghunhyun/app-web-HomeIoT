@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getConfig, updateConfig } from '@/lib/storage/store';
 import { haClient } from '@/lib/homeassistant/client';
+import { AppTheme } from '@/types/config';
 
 export async function GET() {
   const config = getConfig();
   const testRes = await haClient.testConnection();
 
   return NextResponse.json({
+    theme: config.theme || 'familywiki',
     homeAssistant: {
       url: config.homeAssistant.url,
       token: config.homeAssistant.token ? '••••••••' + config.homeAssistant.token.slice(-4) : '',
@@ -21,7 +23,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { url, token, useMock, testOnly } = body;
+    const { url, token, useMock, testOnly, theme } = body;
 
     const currentConfig = getConfig();
     const newHAConfig = {
@@ -31,17 +33,21 @@ export async function POST(request: NextRequest) {
     };
 
     if (testOnly) {
-      // 임시 연결 테스트
-      const tempUpdated = updateConfig({ homeAssistant: newHAConfig });
       const testResult = await haClient.testConnection();
       return NextResponse.json({ success: true, testResult });
     }
 
-    const updated = updateConfig({ homeAssistant: newHAConfig });
+    const updates: any = { homeAssistant: newHAConfig };
+    if (theme && ['light', 'dark', 'familywiki'].includes(theme)) {
+      updates.theme = theme as AppTheme;
+    }
+
+    const updated = updateConfig(updates);
     const testResult = await haClient.testConnection();
 
     return NextResponse.json({
       success: true,
+      theme: updated.theme || 'familywiki',
       homeAssistant: {
         url: updated.homeAssistant.url,
         token: updated.homeAssistant.token ? '••••••••' + updated.homeAssistant.token.slice(-4) : '',

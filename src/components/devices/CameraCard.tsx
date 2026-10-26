@@ -17,29 +17,29 @@ export const CameraCard: React.FC<Props> = ({ device }) => {
 
   return (
     <>
-      <div className="rounded-3xl p-5 border bg-white/80 dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800 transition-all duration-300">
+      <div className="rounded-3xl p-5 border theme-bg-card theme-border transition-all duration-300">
         <div className="flex items-start justify-between mb-3.5">
           <div className="flex items-center space-x-3.5">
-            <div className="w-12 h-12 rounded-2xl bg-violet-100 dark:bg-violet-950/60 text-violet-600 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl theme-bg-sub text-violet-500 flex items-center justify-center">
               <Camera className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-base leading-tight">
+              <h3 className="font-semibold theme-text-main text-base leading-tight">
                 {device.name}
               </h3>
               <div className="flex items-center space-x-2 mt-1">
-                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-950/60 text-violet-700 dark:text-violet-300 flex items-center gap-1">
+                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-violet-500/15 text-violet-600 dark:text-violet-400 border border-violet-500/20 flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
                   실시간 모니터링
                 </span>
-                <span className="text-[11px] text-zinc-400 capitalize">{device.platform}</span>
+                <span className="text-[11px] theme-text-muted capitalize">{device.platform}</span>
               </div>
             </div>
           </div>
 
           <button
             onClick={() => setModalOpen(true)}
-            className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200 transition-colors"
+            className="p-2 rounded-xl theme-bg-sub theme-text-sub hover:opacity-80 transition-opacity"
             title="크게 보기"
           >
             <Maximize2 className="w-4 h-4" />

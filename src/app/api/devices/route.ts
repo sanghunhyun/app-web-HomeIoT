@@ -25,6 +25,7 @@ export async function GET(request: NextRequest) {
       rooms: config.rooms.sort((a, b) => a.order - b.order),
       isMock: config.homeAssistant.useMock,
       role: session?.role || 'user',
+      theme: config.theme || 'familywiki',
     });
   } catch (err: any) {
     return NextResponse.json(

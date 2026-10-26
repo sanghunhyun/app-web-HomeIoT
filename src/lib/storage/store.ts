@@ -20,6 +20,7 @@ const DEFAULT_CONFIG: AppConfig = {
   userPin: process.env.USER_PIN || '1234',
   adminPin: process.env.ADMIN_PIN || '5678',
   jwtSecret: process.env.JWT_SECRET || 'home-iot-secure-salt-2026-family',
+  theme: 'familywiki', // 기본 테마: familywiki (화이트, 다크로 변경 가능)
   homeAssistant: {
     url: process.env.HA_URL || 'http://localhost:8123',
     token: process.env.HA_TOKEN || '',

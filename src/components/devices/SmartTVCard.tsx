@@ -44,8 +44,8 @@ export const SmartTVCard: React.FC<Props> = ({ device, onCommand }) => {
     <div
       className={`relative rounded-3xl p-5 transition-all duration-300 border ${
         isOn
-          ? 'bg-gradient-to-br from-purple-500/10 via-purple-500/5 to-transparent border-purple-500/30 shadow-lg shadow-purple-500/5'
-          : 'bg-white/80 dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800'
+          ? 'bg-gradient-to-br from-purple-500/15 via-purple-500/5 to-transparent border-purple-500/40 shadow-lg shadow-purple-500/5'
+          : 'theme-bg-card theme-border'
       }`}
     >
       <div className="flex items-start justify-between">
@@ -54,26 +54,26 @@ export const SmartTVCard: React.FC<Props> = ({ device, onCommand }) => {
             className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
               isOn
                 ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30'
-                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
+                : 'theme-bg-sub theme-text-muted'
             }`}
           >
             <Tv className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-base leading-tight">
+            <h3 className="font-semibold theme-text-main text-base leading-tight">
               {device.name}
             </h3>
             <div className="flex items-center space-x-2 mt-1">
               <span
                 className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                   isOn
-                    ? 'bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300'
-                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+                    ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400 border border-purple-500/20'
+                    : 'theme-bg-sub theme-text-muted'
                 }`}
               >
                 {isOn ? `재생 중 • ${currentSource}` : '전원 꺼짐'}
               </span>
-              <span className="text-[11px] text-zinc-400 capitalize">{device.platform}</span>
+              <span className="text-[11px] theme-text-muted capitalize">{device.platform}</span>
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ export const SmartTVCard: React.FC<Props> = ({ device, onCommand }) => {
           className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${
             isOn
               ? 'bg-purple-600 text-white shadow-md shadow-purple-500/30'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 hover:text-zinc-600'
+              : 'theme-bg-sub theme-text-muted hover:opacity-80'
           }`}
         >
           <Power className="w-5 h-5" />
@@ -94,34 +94,34 @@ export const SmartTVCard: React.FC<Props> = ({ device, onCommand }) => {
       </div>
 
       {isOn && (
-        <div className="mt-5 space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/80">
+        <div className="mt-5 space-y-4 pt-4 border-t theme-border">
           {/* 볼륨 컨트롤 */}
-          <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-2xl">
+          <div className="flex items-center justify-between theme-bg-sub p-3 rounded-2xl">
             <div className="flex items-center space-x-2">
               <button
                 onClick={toggleMute}
                 className={`p-1.5 rounded-xl ${
                   isMuted
-                    ? 'bg-rose-100 text-rose-600'
-                    : 'text-zinc-600 dark:text-zinc-300 hover:bg-zinc-200'
+                    ? 'bg-rose-500/20 text-rose-600'
+                    : 'theme-text-sub hover:opacity-80'
                 }`}
               >
                 {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
               </button>
-              <span className="text-xs text-zinc-500">
+              <span className="text-xs theme-text-muted">
                 {isMuted ? '음소거' : `볼륨 ${volume}`}
               </span>
             </div>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => changeVolume(-2)}
-                className="w-8 h-8 rounded-xl bg-white dark:bg-zinc-700 shadow-sm flex items-center justify-center text-zinc-700 dark:text-zinc-200 active:scale-95"
+                className="w-8 h-8 rounded-xl theme-bg-card theme-border border shadow-sm flex items-center justify-center theme-text-main active:scale-95"
               >
                 <Minus className="w-4 h-4" />
               </button>
               <button
                 onClick={() => changeVolume(2)}
-                className="w-8 h-8 rounded-xl bg-white dark:bg-zinc-700 shadow-sm flex items-center justify-center text-zinc-700 dark:text-zinc-200 active:scale-95"
+                className="w-8 h-8 rounded-xl theme-bg-card theme-border border shadow-sm flex items-center justify-center theme-text-main active:scale-95"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -136,8 +136,8 @@ export const SmartTVCard: React.FC<Props> = ({ device, onCommand }) => {
                 onClick={() => setSource(src)}
                 className={`text-xs px-3 py-1.5 rounded-xl font-medium transition-all ${
                   currentSource === src
-                    ? 'bg-purple-600 text-white shadow-sm'
-                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'
+                    ? 'bg-purple-600 text-white shadow-sm font-bold'
+                    : 'theme-bg-sub theme-text-sub hover:opacity-80'
                 }`}
               >
                 {src}

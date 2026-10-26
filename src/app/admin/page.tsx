@@ -34,35 +34,35 @@ export default function AdminPage() {
   }, [fetchAdminData]);
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col">
+    <div className="min-h-screen theme-bg-app theme-text-main flex flex-col">
       {/* 상단 관리자 헤더 */}
-      <header className="sticky top-0 z-30 backdrop-blur-md bg-white/75 dark:bg-zinc-950/75 border-b border-zinc-200/80 dark:border-zinc-800">
+      <header className="sticky top-0 z-30 backdrop-blur-md theme-bg-header theme-border border-b">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Link
               href="/"
-              className="p-2 rounded-xl text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors flex items-center space-x-1"
+              className="p-2 rounded-xl theme-text-muted hover:theme-text-main theme-bg-sub transition-colors flex items-center space-x-1"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="text-xs font-semibold">대시보드로 돌아가기</span>
             </Link>
-            <div className="h-4 w-px bg-zinc-200 dark:bg-zinc-800" />
+            <div className="h-4 w-px theme-border bg-current opacity-20" />
             <div className="flex items-center space-x-2">
-              <span className="font-bold text-base text-zinc-900 dark:text-zinc-100">
+              <span className="font-bold text-base theme-text-main">
                 IoT 관리자 센터
               </span>
-              <span className="text-[10px] font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-700 dark:text-indigo-300 px-2 py-0.5 rounded-full flex items-center gap-1">
+              <span className="text-[10px] font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full flex items-center gap-1 border border-emerald-500/30">
                 <ShieldCheck className="w-3 h-3" /> ADMIN
               </span>
             </div>
           </div>
 
           {/* 탭 네비게이션 */}
-          <div className="flex items-center space-x-1 bg-zinc-100 dark:bg-zinc-850 p-1 rounded-2xl">
+          <div className="flex items-center space-x-1 theme-bg-sub p-1 rounded-2xl theme-border border">
             {[
               { id: 'devices', label: '기기 관리', icon: Cpu },
               { id: 'rooms', label: '공간(방)', icon: Home },
-              { id: 'settings', label: 'HA & 보안', icon: Settings },
+              { id: 'settings', label: '설정 & 테마', icon: Settings },
             ].map((tab) => {
               const Icon = tab.icon;
               const active = activeTab === tab.id;
@@ -72,8 +72,8 @@ export default function AdminPage() {
                   onClick={() => setActiveTab(tab.id as AdminTab)}
                   className={`flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                     active
-                      ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 shadow-sm'
-                      : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300'
+                      ? 'theme-bg-card theme-text-main shadow-sm font-bold'
+                      : 'theme-text-muted hover:theme-text-main'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />

@@ -39,8 +39,8 @@ export const AirConditionerCard: React.FC<Props> = ({ device, onCommand }) => {
     <div
       className={`relative rounded-3xl p-5 transition-all duration-300 border ${
         isOn
-          ? 'bg-gradient-to-br from-sky-500/10 via-sky-500/5 to-transparent border-sky-500/30 shadow-lg shadow-sky-500/5'
-          : 'bg-white/80 dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800'
+          ? 'bg-gradient-to-br from-sky-500/15 via-sky-500/5 to-transparent border-sky-500/40 shadow-lg shadow-sky-500/5'
+          : 'theme-bg-card theme-border'
       }`}
     >
       <div className="flex items-start justify-between">
@@ -49,26 +49,26 @@ export const AirConditionerCard: React.FC<Props> = ({ device, onCommand }) => {
             className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
               isOn
                 ? 'bg-sky-500 text-white shadow-md shadow-sky-500/30'
-                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
+                : 'theme-bg-sub theme-text-muted'
             }`}
           >
             <Wind className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-base leading-tight">
+            <h3 className="font-semibold theme-text-main text-base leading-tight">
               {device.name}
             </h3>
             <div className="flex items-center space-x-2 mt-1">
               <span
                 className={`text-xs font-medium px-2 py-0.5 rounded-full ${
                   isOn
-                    ? 'bg-sky-100 dark:bg-sky-950/60 text-sky-700 dark:text-sky-300'
-                    : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'
+                    ? 'bg-sky-500/15 text-sky-600 dark:text-sky-400 border border-sky-500/20'
+                    : 'theme-bg-sub theme-text-muted'
                 }`}
               >
                 {isOn ? `가동 중 • 현재 ${currentTemp}°C` : '꺼짐'}
               </span>
-              <span className="text-[11px] text-zinc-400 capitalize">{device.platform}</span>
+              <span className="text-[11px] theme-text-muted capitalize">{device.platform}</span>
             </div>
           </div>
         </div>
@@ -81,7 +81,7 @@ export const AirConditionerCard: React.FC<Props> = ({ device, onCommand }) => {
           className={`w-10 h-10 rounded-2xl flex items-center justify-center transition-all ${
             isOn
               ? 'bg-sky-500 text-white shadow-md shadow-sky-500/30'
-              : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400 hover:text-zinc-600'
+              : 'theme-bg-sub theme-text-muted hover:opacity-80'
           }`}
         >
           <Power className="w-5 h-5" />
@@ -89,14 +89,14 @@ export const AirConditionerCard: React.FC<Props> = ({ device, onCommand }) => {
       </div>
 
       {isOn && (
-        <div className="mt-5 space-y-4 pt-4 border-t border-zinc-100 dark:border-zinc-800/80">
+        <div className="mt-5 space-y-4 pt-4 border-t theme-border">
           {/* 희망 온도 컨트롤러 */}
-          <div className="flex items-center justify-between bg-zinc-50 dark:bg-zinc-800/50 p-3 rounded-2xl">
-            <span className="text-xs text-zinc-500 font-medium">희망 설정 온도</span>
+          <div className="flex items-center justify-between theme-bg-sub p-3 rounded-2xl">
+            <span className="text-xs theme-text-sub font-medium">희망 설정 온도</span>
             <div className="flex items-center space-x-3">
               <button
                 onClick={() => changeTemp(-0.5)}
-                className="w-8 h-8 rounded-xl bg-white dark:bg-zinc-700 shadow-sm flex items-center justify-center text-zinc-700 dark:text-zinc-200 active:scale-95"
+                className="w-8 h-8 rounded-xl theme-bg-card theme-border border shadow-sm flex items-center justify-center theme-text-main active:scale-95"
               >
                 <Minus className="w-4 h-4" />
               </button>
@@ -105,7 +105,7 @@ export const AirConditionerCard: React.FC<Props> = ({ device, onCommand }) => {
               </span>
               <button
                 onClick={() => changeTemp(0.5)}
-                className="w-8 h-8 rounded-xl bg-white dark:bg-zinc-700 shadow-sm flex items-center justify-center text-zinc-700 dark:text-zinc-200 active:scale-95"
+                className="w-8 h-8 rounded-xl theme-bg-card theme-border border shadow-sm flex items-center justify-center theme-text-main active:scale-95"
               >
                 <Plus className="w-4 h-4" />
               </button>
@@ -127,8 +127,8 @@ export const AirConditionerCard: React.FC<Props> = ({ device, onCommand }) => {
                   onClick={() => setMode(m.id)}
                   className={`flex items-center justify-center space-x-1.5 py-2 px-3 rounded-xl text-xs font-medium transition-all ${
                     active
-                      ? 'bg-sky-500 text-white shadow-sm shadow-sky-500/20'
-                      : 'bg-zinc-100 dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'
+                      ? 'bg-sky-500 text-white shadow-sm shadow-sky-500/20 font-bold'
+                      : 'theme-bg-sub theme-text-sub hover:opacity-80'
                   }`}
                 >
                   <Icon className="w-3.5 h-3.5" />

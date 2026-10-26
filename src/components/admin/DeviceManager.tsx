@@ -63,15 +63,15 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
   };
 
   return (
-    <div className="bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-200/80 dark:border-zinc-800 p-6 shadow-sm">
+    <div className="theme-bg-card rounded-3xl theme-border border p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-100">기기 매핑 & 표시 관리</h2>
-          <p className="text-xs text-zinc-500 mt-1">
+          <h2 className="text-lg font-bold theme-text-main">기기 매핑 & 표시 관리</h2>
+          <p className="text-xs theme-text-muted mt-1">
             가족 구성원에게 보여줄 이름, 배치할 방, 기기 종류 및 표시 여부를 설정합니다.
           </p>
         </div>
-        <span className="text-xs bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full font-semibold text-zinc-600 dark:text-zinc-300">
+        <span className="text-xs theme-bg-sub px-3 py-1.5 rounded-full font-semibold theme-text-sub theme-border border">
           총 {devices.length}대 기기
         </span>
       </div>
@@ -79,7 +79,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead>
-            <tr className="border-b border-zinc-100 dark:border-zinc-800 text-xs font-semibold text-zinc-500">
+            <tr className="border-b theme-border text-xs font-semibold theme-text-muted">
               <th className="pb-3 px-3">기기 ID / 플랫폼</th>
               <th className="pb-3 px-3">표시 이름</th>
               <th className="pb-3 px-3">배치된 방</th>
@@ -89,17 +89,17 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
               <th className="pb-3 px-3 text-right">설정</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+          <tbody className="divide-y theme-border">
             {devices.map((device) => {
               const isEditing = editingId === device.id;
               const isSuccess = savedSuccess === device.id;
 
               return (
-                <tr key={device.id} className="hover:bg-zinc-50/60 dark:hover:bg-zinc-800/30 transition-colors">
+                <tr key={device.id} className="hover:opacity-90 transition-opacity">
                   {/* 기기 ID / 플랫폼 */}
                   <td className="py-3 px-3">
-                    <p className="font-mono text-xs text-zinc-800 dark:text-zinc-200">{device.id}</p>
-                    <span className="text-[10px] uppercase font-bold text-indigo-500 bg-indigo-50 dark:bg-indigo-950/60 px-1.5 py-0.5 rounded">
+                    <p className="font-mono text-xs theme-text-main">{device.id}</p>
+                    <span className="text-[10px] uppercase font-bold text-emerald-600 dark:text-emerald-400 theme-bg-sub px-1.5 py-0.5 rounded border border-emerald-500/20">
                       {device.platform}
                     </span>
                   </td>
@@ -111,10 +111,10 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         type="text"
                         value={formData.customName}
                         onChange={(e) => setFormData({ ...formData, customName: e.target.value })}
-                        className="w-full text-xs p-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800"
+                        className="w-full text-xs p-2 rounded-xl theme-border border theme-bg-sub theme-text-main"
                       />
                     ) : (
-                      <span className="font-medium text-zinc-900 dark:text-zinc-100">{device.name}</span>
+                      <span className="font-medium theme-text-main">{device.name}</span>
                     )}
                   </td>
 
@@ -124,7 +124,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                       <select
                         value={formData.roomId}
                         onChange={(e) => setFormData({ ...formData, roomId: e.target.value })}
-                        className="text-xs p-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800"
+                        className="text-xs p-2 rounded-xl theme-border border theme-bg-sub theme-text-main"
                       >
                         {rooms.map((r) => (
                           <option key={r.id} value={r.id}>
@@ -133,7 +133,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         ))}
                       </select>
                     ) : (
-                      <span className="text-xs px-2.5 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium">
+                      <span className="text-xs px-2.5 py-1 rounded-full theme-bg-sub theme-text-sub font-medium theme-border border">
                         {rooms.find((r) => r.id === device.roomId)?.name || device.roomId}
                       </span>
                     )}
@@ -145,7 +145,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                       <select
                         value={formData.overrideType}
                         onChange={(e) => setFormData({ ...formData, overrideType: e.target.value })}
-                        className="text-xs p-2 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800"
+                        className="text-xs p-2 rounded-xl theme-border border theme-bg-sub theme-text-main"
                       >
                         {DEVICE_TYPES.map((t) => (
                           <option key={t.value} value={t.value}>
@@ -154,7 +154,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         ))}
                       </select>
                     ) : (
-                      <span className="text-xs text-zinc-500">
+                      <span className="text-xs theme-text-muted">
                         {DEVICE_TYPES.find((t) => t.value === device.type)?.label || device.type}
                       </span>
                     )}
@@ -167,8 +167,8 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         onClick={() => setFormData({ ...formData, visible: !formData.visible })}
                         className={`flex items-center space-x-1 px-2.5 py-1 rounded-xl text-xs font-semibold ${
                           formData.visible
-                            ? 'bg-emerald-100 text-emerald-700'
-                            : 'bg-zinc-100 text-zinc-500'
+                            ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30'
+                            : 'theme-bg-sub theme-text-muted'
                         }`}
                       >
                         {formData.visible ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
@@ -178,8 +178,8 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                       <span
                         className={`inline-flex items-center space-x-1 text-xs px-2 py-0.5 rounded-full ${
                           device.visible
-                            ? 'bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300'
-                            : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-400'
+                            ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                            : 'theme-bg-sub theme-text-muted'
                         }`}
                       >
                         {device.visible ? '표시' : '숨김'}
@@ -194,10 +194,10 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         type="number"
                         value={formData.order}
                         onChange={(e) => setFormData({ ...formData, order: Number(e.target.value) })}
-                        className="w-14 text-xs p-1.5 rounded-xl border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 text-center"
+                        className="w-14 text-xs p-1.5 rounded-xl theme-border border theme-bg-sub theme-text-main text-center"
                       />
                     ) : (
-                      <span className="text-xs text-zinc-400 font-mono">{device.order}</span>
+                      <span className="text-xs theme-text-muted font-mono">{device.order}</span>
                     )}
                   </td>
 
@@ -208,14 +208,14 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         <button
                           onClick={() => saveEdit(device.id)}
                           disabled={saving}
-                          className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs flex items-center space-x-1 shadow-sm"
+                          className="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center space-x-1 shadow-sm"
                         >
                           <Save className="w-3.5 h-3.5" />
                           <span>저장</span>
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="px-3 py-1.5 rounded-xl bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-200 text-xs font-semibold"
+                          className="px-3 py-1.5 rounded-xl theme-bg-sub theme-text-sub text-xs font-semibold"
                         >
                           취소
                         </button>
@@ -225,7 +225,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
                         {isSuccess && <CheckCircle2 className="w-4 h-4 text-emerald-500 animate-bounce" />}
                         <button
                           onClick={() => startEdit(device)}
-                          className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:underline px-2 py-1"
+                          className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline px-2 py-1"
                         >
                           수정
                         </button>
