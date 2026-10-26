@@ -9,6 +9,7 @@ import { QuickStatusBanner } from '@/components/dashboard/QuickStatusBanner';
 import { RoomTabs } from '@/components/dashboard/RoomTabs';
 import { DeviceCardRenderer } from '@/components/dashboard/DeviceCardRenderer';
 import { RefreshCw, Inbox, AlertCircle } from 'lucide-react';
+import { authFetch } from '@/lib/api';
 
 export default function DashboardPage() {
   const [devices, setDevices] = useState<Device[]>([]);
@@ -35,7 +36,7 @@ export default function DashboardPage() {
   const fetchDevices = useCallback(async (isBackground = false) => {
     if (!isBackground) setRefreshing(true);
     try {
-      const res = await fetch('/api/devices');
+      const res = await authFetch('/api/devices');
       if (!res.ok) {
         throw new Error(`기기 목록 불러오기 실패: HTTP ${res.status}`);
       }
@@ -88,7 +89,7 @@ export default function DashboardPage() {
 
     // 2. 서버 API 호출
     try {
-      const res = await fetch(`/api/devices/${encodeURIComponent(id)}/command`, {
+      const res = await authFetch(`/api/devices/${encodeURIComponent(id)}/command`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action, payload }),

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Room } from '@/types/room';
 import { Plus, Trash2, Save, Sofa, Bed, Utensils, Flower2, Briefcase } from 'lucide-react';
+import { authFetch } from '@/lib/api';
 
 interface Props {
   rooms: Room[];
@@ -48,7 +49,7 @@ export const RoomManager: React.FC<Props> = ({ rooms, onRefresh }) => {
   const handleSaveAll = async () => {
     setSaving(true);
     try {
-      const res = await fetch('/api/rooms', {
+      const res = await authFetch('/api/rooms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ rooms: roomList }),

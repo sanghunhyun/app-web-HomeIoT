@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Device, DeviceType } from '@/types/device';
 import { Room } from '@/types/room';
 import { Eye, EyeOff, Save, CheckCircle2 } from 'lucide-react';
+import { authFetch } from '@/lib/api';
 
 interface Props {
   devices: Device[];
@@ -42,7 +43,7 @@ export const DeviceManager: React.FC<Props> = ({ devices, rooms, onRefresh }) =>
   const saveEdit = async (deviceId: string) => {
     setSaving(true);
     try {
-      const res = await fetch('/api/admin/mapping', {
+      const res = await authFetch('/api/admin/mapping', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

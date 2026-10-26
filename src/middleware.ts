@@ -31,7 +31,10 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const token = request.cookies.get(COOKIE_NAME)?.value;
+  // 1. 헤더 (Bearer) 또는 2. 쿠키 확인
+  const authHeader = request.headers.get('authorization');
+  const bearerToken = authHeader?.startsWith('Bearer ') ? authHeader.substring(7) : null;
+  const token = bearerToken || request.cookies.get(COOKIE_NAME)?.value;
   const session = token ? await verifyToken(token) : null;
 
   // 로그인 페이지 접근 시

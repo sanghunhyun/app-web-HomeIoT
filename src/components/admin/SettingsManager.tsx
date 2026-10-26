@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Server, KeyRound, CheckCircle2, AlertTriangle, ShieldCheck, RefreshCw } from 'lucide-react';
+import { authFetch } from '@/lib/api';
 
 export const SettingsManager: React.FC = () => {
   const [haUrl, setHaUrl] = useState('http://localhost:8123');
@@ -17,7 +18,7 @@ export const SettingsManager: React.FC = () => {
   const [pinMessage, setPinMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/admin/settings')
+    authFetch('/api/admin/settings')
       .then((res) => res.json())
       .then((data) => {
         if (data.homeAssistant) {
@@ -34,7 +35,7 @@ export const SettingsManager: React.FC = () => {
   const handleTestConnection = async () => {
     setTesting(true);
     try {
-      const res = await fetch('/api/admin/settings', {
+      const res = await authFetch('/api/admin/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -54,7 +55,7 @@ export const SettingsManager: React.FC = () => {
   const handleSaveHa = async () => {
     setSavingHa(true);
     try {
-      const res = await fetch('/api/admin/settings', {
+      const res = await authFetch('/api/admin/settings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -75,7 +76,7 @@ export const SettingsManager: React.FC = () => {
     e.preventDefault();
     if (!userPin && !adminPin) return;
 
-    const res = await fetch('/api/admin/pins', {
+    const res = await authFetch('/api/admin/pins', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userPin, adminPin }),

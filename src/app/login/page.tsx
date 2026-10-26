@@ -64,6 +64,9 @@ export default function LoginPage() {
         setError(data.error || '잘못된 PIN 번호입니다.');
         setPin('');
       } else {
+        if (data.token) {
+          localStorage.setItem('home_iot_token', data.token);
+        }
         router.push('/');
         router.refresh();
       }

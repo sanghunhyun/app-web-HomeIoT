@@ -18,11 +18,12 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    await createSessionCookie(role);
+    const token = await createSessionCookie(role);
 
     return NextResponse.json({
       success: true,
       role,
+      token,
       message: role === 'admin' ? '관리자로 로그인되었습니다.' : '로그인되었습니다.',
     });
   } catch (err: any) {

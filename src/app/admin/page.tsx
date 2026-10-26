@@ -8,6 +8,7 @@ import { Room } from '@/types/room';
 import { DeviceManager } from '@/components/admin/DeviceManager';
 import { RoomManager } from '@/components/admin/RoomManager';
 import { SettingsManager } from '@/components/admin/SettingsManager';
+import { authFetch } from '@/lib/api';
 
 type AdminTab = 'devices' | 'rooms' | 'settings';
 
@@ -19,7 +20,7 @@ export default function AdminPage() {
 
   const fetchAdminData = useCallback(async () => {
     try {
-      const res = await fetch('/api/devices?all=true');
+      const res = await authFetch('/api/devices?all=true');
       const data = await res.json();
       setDevices(data.devices || []);
       setRooms(data.rooms || []);
