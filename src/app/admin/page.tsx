@@ -36,7 +36,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-slate-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 flex flex-col">
       {/* 상단 관리자 헤더 */}
       <header className="sticky top-0 z-30 backdrop-blur-md bg-white/75 dark:bg-zinc-950/75 border-b border-zinc-200/80 dark:border-zinc-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Link
               href="/"
@@ -85,7 +85,7 @@ export default function AdminPage() {
       </header>
 
       {/* 본문 콘텐츠 */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {loading ? (
           <div className="h-64 rounded-3xl bg-zinc-200/50 dark:bg-zinc-800/50 animate-pulse" />
         ) : (

@@ -14,11 +14,25 @@
   }
 }
 
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 body {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
   color: var(--foreground);
   background: var(--background);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* iframe 또는 컨테이너 리사이즈 시 요소들의 부드러운 반응 */
+main, .grid, header {
+  transition: max-width 0.2s ease, padding 0.2s ease;
 }
 
 /* Custom scrollbar */

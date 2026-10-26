@@ -1,18 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Home, Settings, LogOut, ExternalLink, Shield } from 'lucide-react';
+import { Home, Settings, LogOut, ExternalLink } from 'lucide-react';
 import { UserRole } from '@/types/auth';
 
 interface Props {
   role: UserRole;
   isMock: boolean;
   onRefresh?: () => void;
+  isEmbedded?: boolean;
 }
 
-export const Header: React.FC<Props> = ({ role, isMock }) => {
+export const Header: React.FC<Props> = ({ role, isMock, isEmbedded = false }) => {
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -22,17 +23,17 @@ export const Header: React.FC<Props> = ({ role, isMock }) => {
   };
 
   return (
-    <header className="sticky top-0 z-30 backdrop-blur-md bg-white/75 dark:bg-zinc-950/75 border-b border-zinc-200/80 dark:border-zinc-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-30 backdrop-blur-md bg-white/80 dark:bg-zinc-950/80 border-b border-zinc-200/80 dark:border-zinc-800 transition-all">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
         {/* 로고 및 서비스 타이틀 */}
         <div className="flex items-center space-x-3">
           <Link href="/" className="flex items-center space-x-2.5 group">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
-              <Home className="w-5 h-5" />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-sky-500 to-indigo-600 text-white flex items-center justify-center shadow-md shadow-sky-500/20 group-hover:scale-105 transition-transform">
+              <Home className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <div className="flex items-center space-x-2">
-                <span className="font-bold text-base sm:text-lg text-zinc-900 dark:text-zinc-50 tracking-tight">
+                <span className="font-bold text-sm sm:text-base text-zinc-900 dark:text-zinc-50 tracking-tight">
                   우리집 IoT 대시보드
                 </span>
                 {isMock && (
@@ -48,17 +49,19 @@ export const Header: React.FC<Props> = ({ role, isMock }) => {
 
         {/* 액션 버튼들 */}
         <div className="flex items-center space-x-2 sm:space-x-3">
-          {/* FamilyWiki 바로가기 */}
-          <a
-            href="http://localhost:3000"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="FamilyWiki로 이동"
-            className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
-          >
-            <span>FamilyWiki</span>
-            <ExternalLink className="w-3.5 h-3.5" />
-          </a>
+          {/* FamilyWiki 바로가기 (외부에서 접속했을 때만 표시하고, 이미 FamilyWiki iframe 안에서는 숨김) */}
+          {!isEmbedded && (
+            <a
+              href="http://localhost:3000"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="FamilyWiki로 이동"
+              className="hidden md:flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-medium text-zinc-600 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            >
+              <span>FamilyWiki</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          )}
 
           {/* 관리자 뱃지 및 설정 버튼 */}
           {role === 'admin' && (
